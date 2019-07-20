@@ -41,10 +41,10 @@ function unary(fn) { return function(a){ return fn(a);}; }
 
 exports.inspect = function(files, outputDir, options, done) {
 
-	if (!files) {
-	  // at least give me a file man...
-	  return;
-	}
+  if (!files) {
+    // at least give me a file man...
+    return;
+  }
 
   files = files instanceof Array ? files : [files];
   files = _.flatten(files.map(unary(glob.sync)));
