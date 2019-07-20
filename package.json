@@ -32,12 +32,15 @@
     "lint": "eslint -c .eslintrc src"
   },
   "devDependencies": {
+    "@types/node": "12.6.8",
     "eslint": "6.0.1",
     "grunt": "~1.0.1",
     "grunt-contrib-jshint": "~2.1.0",
     "grunt-contrib-nodeunit": "~2.0.0",
     "grunt-contrib-uglify": "~4.0.1",
-    "grunt-contrib-watch": "~1.1.0"
+    "grunt-contrib-watch": "~1.1.0",
+    "ts-node": "8.3.0",
+    "typescript": "3.5.3"
   },
   "keywords": [
     "halstead",
