@@ -150,7 +150,7 @@ CodeMirror.indentRangeFinder = function(cm, start) {
 
 CodeMirror.newFoldFunction = function(rangeFinder, widget) {
   if (widget == null) widget = "\u2194";
-  if (typeof widget == "string") {
+  if (typeof widget === "string") {
     var text = document.createTextNode(widget);
     widget = document.createElement("span");
     widget.appendChild(text);
@@ -158,7 +158,7 @@ CodeMirror.newFoldFunction = function(rangeFinder, widget) {
   }
 
   return function(cm, pos) {
-    if (typeof pos == "number") pos = {line: pos, ch: 0};
+    if (typeof pos === "number") pos = {line: pos, ch: 0};
     var range = rangeFinder(cm, pos);
     if (!range) return;
 

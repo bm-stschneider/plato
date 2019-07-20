@@ -96,7 +96,7 @@
       if (str.indexOf(start) == 0 && !arrayContains(found, str)) found.push(str);
     }
     function gatherCompletions(obj) {
-      if (typeof obj == "string") forEach(stringProps, maybeAdd);
+      if (typeof obj === "string") forEach(stringProps, maybeAdd);
       else if (obj instanceof Array) forEach(arrayProps, maybeAdd);
       else if (obj instanceof Function) forEach(funcProps, maybeAdd);
       for (var name in obj) maybeAdd(name);
@@ -116,9 +116,9 @@
         base = 1;
       } else if (obj.type == "function") {
         if (window.jQuery != null && (obj.string == '$' || obj.string == 'jQuery') &&
-            (typeof window.jQuery == 'function'))
+            (typeof window.jQuery === 'function'))
           base = window.jQuery();
-        else if (window._ != null && (obj.string == '_') && (typeof window._ == 'function'))
+        else if (window._ != null && (obj.string == '_') && (typeof window._ === 'function'))
           base = window._();
       }
       while (base != null && context.length)

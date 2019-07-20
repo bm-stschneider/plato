@@ -19,7 +19,7 @@
  * ======================================================================== */
 
 
-+function ($) { "use strict";
++(function ($) { "use strict";
 
   // TOOLTIP PUBLIC CLASS DEFINITION
   // ===============================
@@ -81,7 +81,7 @@
   Tooltip.prototype.getOptions = function (options) {
     options = $.extend({}, this.getDefaults(), this.$element.data(), options)
 
-    if (options.delay && typeof options.delay == 'number') {
+    if (options.delay && typeof options.delay === 'number') {
       options.delay = {
         show: options.delay
       , hide: options.delay
@@ -146,7 +146,7 @@
 
       if (this.options.animation) $tip.addClass('fade')
 
-      var placement = typeof this.options.placement == 'function' ?
+      var placement = typeof this.options.placement === 'function' ?
         this.options.placement.call(this, $tip[0], this.$element[0]) :
         this.options.placement
 
@@ -283,7 +283,7 @@
 
   Tooltip.prototype.fixTitle = function () {
     var $e = this.$element
-    if ($e.attr('title') || typeof($e.attr('data-original-title')) != 'string') {
+    if ($e.attr('title') || typeof($e.attr('data-original-title')) !== 'string') {
       $e.attr('data-original-title', $e.attr('title') || '').attr('title', '')
     }
   }
@@ -294,7 +294,7 @@
 
   Tooltip.prototype.getPosition = function () {
     var el = this.$element[0]
-    return $.extend({}, (typeof el.getBoundingClientRect == 'function') ? el.getBoundingClientRect() : {
+    return $.extend({}, (typeof el.getBoundingClientRect === 'function') ? el.getBoundingClientRect() : {
       width: el.offsetWidth
     , height: el.offsetHeight
     }, this.$element.offset())
@@ -313,7 +313,7 @@
     var o  = this.options
 
     title = $e.attr('data-original-title')
-      || (typeof o.title == 'function' ? o.title.call($e[0]) :  o.title)
+      || (typeof o.title === 'function' ? o.title.call($e[0]) :  o.title)
 
     return title
   }
@@ -365,10 +365,10 @@
     return this.each(function () {
       var $this   = $(this)
       var data    = $this.data('bs.tooltip')
-      var options = typeof option == 'object' && option
+      var options = typeof option === 'object' && option
 
       if (!data) $this.data('bs.tooltip', (data = new Tooltip(this, options)))
-      if (typeof option == 'string') data[option]()
+      if (typeof option === 'string') data[option]()
     })
   }
 
@@ -383,4 +383,4 @@
     return this
   }
 
-}(window.jQuery);
+}(window.jQuery));

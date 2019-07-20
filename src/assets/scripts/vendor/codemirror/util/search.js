@@ -16,7 +16,7 @@
   }
   function getSearchCursor(cm, query, pos) {
     // Heuristic: if the query string is all lowercase, do a case insensitive search.
-    return cm.getSearchCursor(query, pos, typeof query == "string" && query == query.toLowerCase());
+    return cm.getSearchCursor(query, pos, typeof query === "string" && query == query.toLowerCase());
   }
   function dialog(cm, text, shortText, f) {
     if (cm.openDialog) cm.openDialog(text, f);
@@ -79,7 +79,7 @@
         if (all) {
           cm.operation(function() {
             for (var cursor = getSearchCursor(cm, query); cursor.findNext();) {
-              if (typeof query != "string") {
+              if (typeof query !== "string") {
                 var match = cm.getRange(cursor.from(), cursor.to()).match(query);
                 cursor.replace(text.replace(/\$(\d)/, function(_, i) {return match[i];}));
               } else cursor.replace(text);
@@ -100,7 +100,7 @@
                           [function() {doReplace(match);}, advance]);
           }
           function doReplace(match) {
-            cursor.replace(typeof query == "string" ? text :
+            cursor.replace(typeof query === "string" ? text :
                            text.replace(/\$(\d)/, function(_, i) {return match[i];}));
             advance();
           }

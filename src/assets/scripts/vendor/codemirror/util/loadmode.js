@@ -21,7 +21,7 @@
   }
 
   CodeMirror.requireMode = function(mode, cont) {
-    if (typeof mode != "string") mode = mode.name;
+    if (typeof mode !== "string") mode = mode.name;
     if (CodeMirror.modes.hasOwnProperty(mode)) return ensureDeps(mode, cont);
     if (loading.hasOwnProperty(mode)) return loading[mode].push(cont);
 

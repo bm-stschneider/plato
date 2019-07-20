@@ -26,9 +26,9 @@
   CodeMirror.defineOption("autoCloseTags", false, function(cm, val, old) {
     if (val && (old == CodeMirror.Init || !old)) {
       var map = {name: "autoCloseTags"};
-      if (typeof val != "object" || val.whenClosing)
+      if (typeof val !== "object" || val.whenClosing)
         map["'/'"] = function(cm) { autoCloseTag(cm, '/'); };
-      if (typeof val != "object" || val.whenOpening)
+      if (typeof val !== "object" || val.whenOpening)
         map["'>'"] = function(cm) { autoCloseTag(cm, '>'); };
       cm.addKeyMap(map);
     } else if (!val && (old != CodeMirror.Init && old)) {
@@ -47,8 +47,8 @@
     if (inner.mode.name != "xml") throw CodeMirror.Pass;
 
     var opt = cm.getOption("autoCloseTags"), html = inner.mode.configuration == "html";
-    var dontCloseTags = (typeof opt == "object" && opt.dontCloseTags) || (html && htmlDontClose);
-    var indentTags = (typeof opt == "object" && opt.indentTags) || (html && htmlIndent);
+    var dontCloseTags = (typeof opt === "object" && opt.dontCloseTags) || (html && htmlDontClose);
+    var indentTags = (typeof opt === "object" && opt.indentTags) || (html && htmlIndent);
 
     if (ch == ">" && state.tagName) {
       var tagName = state.tagName;

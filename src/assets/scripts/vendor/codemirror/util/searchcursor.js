@@ -1,7 +1,7 @@
 (function(){
   function SearchCursor(cm, query, pos, caseFold) {
     this.atOccurrence = false; this.cm = cm;
-    if (caseFold == null && typeof query == "string") caseFold = false;
+    if (caseFold == null && typeof query === "string") caseFold = false;
 
     pos = pos ? cm.clipPos(pos) : {line: 0, ch: 0};
     this.pos = {from: pos, to: pos};
@@ -10,7 +10,7 @@
     // It takes a position and a direction, and returns an object
     // describing the next occurrence of the query, or null if no
     // more matches were found.
-    if (typeof query != "string") { // Regexp match
+    if (typeof query !== "string") { // Regexp match
       if (!query.global) query = new RegExp(query.source, query.ignoreCase ? "ig" : "g");
       this.matches = function(reverse, pos) {
         if (reverse) {

@@ -331,7 +331,7 @@ window.CodeMirror = (function() {
 
   function visibleLines(display, doc, viewPort) {
     var top = display.scroller.scrollTop, height = display.wrapper.clientHeight;
-    if (typeof viewPort == "number") top = viewPort;
+    if (typeof viewPort === "number") top = viewPort;
     else if (viewPort) {top = viewPort.top; height = viewPort.bottom - viewPort.top;}
     top = Math.floor(top - paddingTop(display));
     var bottom = Math.ceil(top + height);
@@ -1657,7 +1657,7 @@ window.CodeMirror = (function() {
   }
 
   function doHandleBinding(cm, bound, dropShift) {
-    if (typeof bound == "string") {
+    if (typeof bound === "string") {
       bound = commands[bound];
       if (!bound) return false;
     }
@@ -1711,7 +1711,7 @@ window.CodeMirror = (function() {
       handled = lookupKey("Shift-" + name, keymaps,
                           function(b) {return doHandleBinding(cm, b, true);}, stop)
         || lookupKey(name, keymaps, function(b) {
-          if (typeof b == "string" && /^go[A-Z]/.test(b)) return doHandleBinding(cm, b);
+          if (typeof b === "string" && /^go[A-Z]/.test(b)) return doHandleBinding(cm, b);
         }, stop);
     } else {
       handled = lookupKey(name, keymaps,
@@ -1979,7 +1979,7 @@ window.CodeMirror = (function() {
       // Normalize lines to contain only strings, since that's what
       // the change event handler expects
       for (var i = 0; i < lines.length; ++i)
-        if (typeof lines[i] != "string") lines[i] = lines[i].text;
+        if (typeof lines[i] !== "string") lines[i] = lines[i].text;
       var changeObj = {from: from, to: to, text: lines, origin: origin};
       if (cm.curOp.textChanged) {
         for (var cur = cm.curOp.textChanged; cur.next; cur = cur.next) {}
@@ -1990,7 +1990,7 @@ window.CodeMirror = (function() {
     // Update the selection
     var newSelFrom, newSelTo, end = {line: from.line + lines.length - 1,
                                      ch: hlText(lastHL).length  + (lines.length == 1 ? from.ch : 0)};
-    if (selUpdate && typeof selUpdate != "string") {
+    if (selUpdate && typeof selUpdate !== "string") {
       if (selUpdate.from) { newSelFrom = selUpdate.from; newSelTo = selUpdate.to; }
       else newSelFrom = newSelTo = selUpdate;
     } else if (selUpdate == "end") {
@@ -2241,7 +2241,7 @@ window.CodeMirror = (function() {
 
   function changeLine(cm, handle, op) {
     var no = handle, line = handle, doc = cm.view.doc;
-    if (typeof handle == "number") line = getLine(doc, clipLine(doc, handle));
+    if (typeof handle === "number") line = getLine(doc, clipLine(doc, handle));
     else no = lineNo(handle);
     if (no == null) return null;
     if (op(line, no)) regChange(cm, no, no + 1);
@@ -2345,7 +2345,7 @@ window.CodeMirror = (function() {
     removeKeyMap: function(map) {
       var maps = this.view.keyMaps;
       for (var i = 0; i < maps.length; ++i)
-        if ((typeof map == "string" ? maps[i].name : maps[i]) == map) {
+        if ((typeof map === "string" ? maps[i].name : maps[i]) == map) {
           maps.splice(i, 1);
           return true;
         }
@@ -2355,7 +2355,7 @@ window.CodeMirror = (function() {
     redo: operation(null, function() {unredoHelper(this, "redo");}),
 
     indentLine: operation(null, function(n, dir, aggressive) {
-      if (typeof dir != "string") {
+      if (typeof dir !== "string") {
         if (dir == null) dir = this.options.smartIndent ? "smart" : "prev";
         else dir = dir ? "add" : "subtract";
       }
@@ -2436,7 +2436,7 @@ window.CodeMirror = (function() {
     cursorCoords: function(start, mode) {
       var pos, sel = this.view.sel;
       if (start == null) pos = sel.head;
-      else if (typeof start == "object") pos = clipPos(this.view.doc, start);
+      else if (typeof start === "object") pos = clipPos(this.view.doc, start);
       else pos = start ? sel.from : sel.to;
       return cursorCoords(this, pos, mode || "page");
     },
@@ -2541,7 +2541,7 @@ window.CodeMirror = (function() {
     }),
 
     lineInfo: function(line) {
-      if (typeof line == "number") {
+      if (typeof line === "number") {
         if (!isLine(this.view.doc, line)) return null;
         var n = line;
         line = getLine(this.view.doc, line);
@@ -2602,7 +2602,7 @@ window.CodeMirror = (function() {
     somethingSelected: function() {return !posEq(this.view.sel.from, this.view.sel.to);},
 
     setCursor: operation(null, function(line, ch, extend) {
-      var pos = clipPos(this.view.doc, typeof line == "number" ? {line: line, ch: ch || 0} : line);
+      var pos = clipPos(this.view.doc, typeof line === "number" ? {line: line, ch: ch || 0} : line);
       if (extend) extendSelection(this, pos);
       else setSelection(this, pos, pos);
     }),
@@ -2734,14 +2734,14 @@ window.CodeMirror = (function() {
     },
 
     scrollIntoView: function(pos) {
-      if (typeof pos == "number") pos = {line: pos, ch: 0};
+      if (typeof pos === "number") pos = {line: pos, ch: 0};
       pos = pos ? clipPos(this.view.doc, pos) : this.view.sel.head;
       scrollPosIntoView(this, pos);
     },
 
     setSize: function(width, height) {
       function interpret(val) {
-        return typeof val == "number" || /^\d+$/.test(String(val)) ? val + "px" : val;
+        return typeof val === "number" || /^\d+$/.test(String(val)) ? val + "px" : val;
       }
       if (width != null) this.display.wrapper.style.width = interpret(width);
       if (height != null) this.display.wrapper.style.height = interpret(height);
@@ -2858,11 +2858,11 @@ window.CodeMirror = (function() {
   };
 
   CodeMirror.resolveMode = function(spec) {
-    if (typeof spec == "string" && mimeModes.hasOwnProperty(spec))
+    if (typeof spec === "string" && mimeModes.hasOwnProperty(spec))
       spec = mimeModes[spec];
-    else if (typeof spec == "string" && /^[\w\-]+\/[\w\-]+\+xml$/.test(spec))
+    else if (typeof spec === "string" && /^[\w\-]+\/[\w\-]+\+xml$/.test(spec))
       return CodeMirror.resolveMode("application/xml");
-    if (typeof spec == "string") return {name: spec};
+    if (typeof spec === "string") return {name: spec};
     else return spec || {name: "null"};
   };
 
@@ -3048,7 +3048,7 @@ window.CodeMirror = (function() {
   // KEYMAP DISPATCH
 
   function getKeyMap(val) {
-    if (typeof val == "string") return keyMap[val];
+    if (typeof val === "string") return keyMap[val];
     else return val;
   }
 
@@ -3128,7 +3128,7 @@ window.CodeMirror = (function() {
       textarea.style.display = "";
       if (textarea.form) {
         off(textarea.form, "submit", save);
-        if (typeof textarea.form.submit == "function")
+        if (typeof textarea.form.submit === "function")
           textarea.form.submit = realSubmit;
       }
     };
@@ -3157,7 +3157,7 @@ window.CodeMirror = (function() {
     },
     eat: function(match) {
       var ch = this.string.charAt(this.pos);
-      if (typeof match == "string") var ok = ch == match;
+      if (typeof match === "string") var ok = ch == match;
       else var ok = ch && (match.test ? match.test(ch) : match(ch));
       if (ok) {++this.pos; return ch;}
     },
@@ -3180,7 +3180,7 @@ window.CodeMirror = (function() {
     column: function() {return countColumn(this.string, this.start, this.tabSize);},
     indentation: function() {return countColumn(this.string, null, this.tabSize);},
     match: function(pattern, consume, caseInsensitive) {
-      if (typeof pattern == "string") {
+      if (typeof pattern === "string") {
         var cased = function(str) {return caseInsensitive ? str.toLowerCase() : str;};
         if (cased(this.string).indexOf(cased(pattern), this.pos) == this.pos) {
           if (consume !== false) this.pos += pattern.length;
@@ -3461,9 +3461,9 @@ window.CodeMirror = (function() {
 
   // hl stands for history-line, a data structure that can be either a
   // string (line without markers) or a {text, markedSpans} object.
-  function hlText(val) { return typeof val == "string" ? val : val.text; }
+  function hlText(val) { return typeof val === "string" ? val : val.text; }
   function hlSpans(val) {
-    if (typeof val == "string") return null;
+    if (typeof val === "string") return null;
     var spans = val.markedSpans, out = null;
     for (var i = 0; i < spans.length; ++i) {
       if (spans[i].marker.explicitlyCleared) { if (!out) out = spans.slice(0, i); }
@@ -4078,7 +4078,7 @@ window.CodeMirror = (function() {
     var arr = emitter._handlers && emitter._handlers[type];
     if (!arr) return;
     var args = Array.prototype.slice.call(arguments, 3), flist = cm.curOp && cm.curOp.delayedCallbacks;
-    function bnd(f) {return function(){f.apply(null, args);};};
+    function bnd(f) {return function(){f.apply(null, args);};}
     for (var i = 0; i < arr.length; ++i)
       if (flist) flist.push(bnd(arr[i]));
       else arr[i].apply(null, args);
@@ -4171,7 +4171,7 @@ window.CodeMirror = (function() {
     var e = document.createElement(tag);
     if (className) e.className = className;
     if (style) e.style.cssText = style;
-    if (typeof content == "string") setTextContent(e, content);
+    if (typeof content === "string") setTextContent(e, content);
     else if (content) for (var i = 0; i < content.length; ++i) e.appendChild(content[i]);
     return e;
   }
@@ -4195,13 +4195,13 @@ window.CodeMirror = (function() {
   // FEATURE DETECTION
 
   // Detect drag-and-drop
-  var dragAndDrop = function() {
+  var dragAndDrop = (function() {
     // There is *some* kind of drag-and-drop support in IE6-8, but I
     // couldn't get it to work yet.
     if (ie_lt9) return false;
     var div = elt('div');
     return "draggable" in div || "dragDrop" in div;
-  }();
+  }());
 
   // For a reason I have yet to figure out, some browsers disallow
   // word wrapping between certain characters *only* if a new inline
@@ -4272,7 +4272,7 @@ window.CodeMirror = (function() {
     var e = elt("div");
     if ("oncopy" in e) return true;
     e.setAttribute("oncopy", "return;");
-    return typeof e.oncopy == 'function';
+    return typeof e.oncopy === 'function';
   })();
 
   // KEY NAMING
