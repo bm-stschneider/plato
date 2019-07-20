@@ -28,7 +28,8 @@
     "node": ">= 4.4.5"
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt test",
+    "lint": "eslint -c .eslintrc src"
   },
   "devDependencies": {
     "eslint": "6.0.1",
