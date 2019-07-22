@@ -4,7 +4,9 @@
     "node": true,
     "browser": true
   },
-  "globals": {},
+  "globals": {
+    "casper": "readonly"
+  },
   "rules": {
     "curly": 0,
     "eqeqeq": 2,
