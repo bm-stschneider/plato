@@ -24,6 +24,23 @@ module.exports = function(grunt) {
         src: ['lib/assets/scripts/*.js']
       }
     },
+    eslint: {
+      options: {
+        configFile: '.eslintrc'
+      },
+      gruntfile: {
+        src: 'Gruntfile.js'
+      },
+      lib: {
+        src: ['lib/**/*.js', '!lib/assets/**/*.js']
+      },
+      test: {
+        src: ['test/**/*.js','!test/fixtures/**/*.js']
+      },
+      assets: {
+        src: ['lib/assets/scripts/*.js']
+      }
+    },
     uglify: {
       'assets' : {
         files : {
@@ -46,44 +63,45 @@ module.exports = function(grunt) {
     },
     watch: {
       gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
+        files: '<%= eslint.gruntfile.src %>',
+        tasks: ['eslint:gruntfile']
       },
       lib: {
-        files: '<%= jshint.lib.src %>',
-        tasks: ['jshint:lib', 'nodeunit']
+        files: '<%= eslint.lib.src %>',
+        tasks: ['eslint:lib', 'nodeunit']
       },
       test: {
-        files: '<%= jshint.test.src %>',
-        tasks: ['jshint:test', 'nodeunit']
+        files: '<%= eslint.test.src %>',
+        tasks: ['eslint:test', 'nodeunit']
       }
     },
-    casper : {
-      test: {
-        files: {
-          'reports/casper.xml': [
-            'test/casper-overview.js',
-            'test/casper-sortable-file-list.js'
-          ],
-        },
-        options : {
-          test: true,
-          verbose: true,
-          'fail-fast': true,
-          'log-level': 'error',
-          concise: true,
-          parallel : false,
-          concurrency : 2
-        }
-      }
-    }
+    // casper : {
+    //   test: {
+    //     files: {
+    //       'reports/casper.xml': [
+    //         'test/casper-overview.js',
+    //         'test/casper-sortable-file-list.js'
+    //       ],
+    //     },
+    //     options : {
+    //       test: true,
+    //       verbose: true,
+    //       'fail-fast': true,
+    //       'log-level': 'error',
+    //       concise: true,
+    //       parallel : false,
+    //       concurrency : 2
+    //     }
+    //   }
+    // }
   });
 
+  grunt.loadNpmTasks('grunt-eslint');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-nodeunit');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-casper');
+  // grunt.loadNpmTasks('grunt-casper');
 
   grunt.registerTask('runtest',function(){
     var done = this.async();
@@ -116,7 +134,7 @@ module.exports = function(grunt) {
         args : [
           '-q',
           '-r',
-          '-l.jshintrc',
+          '-l.eslintrc',
           '-xvendor|bundles',
           '-dreports',
           '-tPlato report',
@@ -136,7 +154,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('optimize', ['uglify']);
   // Default task.
-  grunt.registerTask('test', ['jshint', 'nodeunit', 'runtest', 'runbin', 'casper']);
+  grunt.registerTask('test', ['eslint', 'nodeunit', 'runtest', 'runbin']);
   grunt.registerTask('default', ['test']);
 
 };

@@ -39,6 +39,8 @@
     "grunt-contrib-nodeunit": "~2.0.0",
     "grunt-contrib-uglify": "~4.0.1",
     "grunt-contrib-watch": "~1.1.0",
+    "grunt-eslint": "22.0.0",
+    "jshint": "2.10.2",
     "ts-node": "8.3.0",
     "typescript": "3.5.3"
   },
@@ -56,6 +58,7 @@
     "glob": "~7.1.4",
     "lodash": "~4.17.15",
     "posix-getopt": "~1.2.0",
-    "typhonjs-escomplex": "0.1.0"
+    "typhonjs-escomplex": "0.1.0",
+    "winston": "3.2.1"
   }
 }
