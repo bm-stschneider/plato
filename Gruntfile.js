@@ -134,7 +134,7 @@ module.exports = function(grunt) {
         args : [
           '-q',
           '-r',
-          '-l.eslintrc',
+          '-l.jshintrc',
           '-xvendor|bundles',
           '-dreports',
           '-tPlato report',
@@ -154,7 +154,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('optimize', ['uglify']);
   // Default task.
-  grunt.registerTask('test', ['eslint', 'nodeunit', 'runtest', 'runbin']);
+  grunt.registerTask('test', ['jshint', 'eslint', 'nodeunit', 'runtest', 'runbin']);
   grunt.registerTask('default', ['test']);
 
 };

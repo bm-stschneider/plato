@@ -195,7 +195,7 @@ exports.getOverviewReport = function (reports) {
 
   reports.forEach(function(report) {
     // clone objects so we don't have to worry about side effects
-    summary.total.sloc += report.complexity.methodAggregate.sloc.physical;
+    summary.total.sloc += report.complexity.aggregate.sloc.physical;
     summary.total.maintainability += report.complexity.maintainability;
 
     var methodAggregate = _.cloneDeep(report.complexity.methodAggregate);
