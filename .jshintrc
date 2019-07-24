@@ -14,5 +14,6 @@
   "globals": {
     "document": false,
     "casper": false
-  }
+  },
+  "esversion":6
 }
