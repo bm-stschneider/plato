@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = function(grunt) {
+  require('load-grunt-tasks')(grunt);
   var libFolder = process.env.DEV === libFolder + '' ? libFolder + '' : 'src';
 
   // Project configuration.
@@ -96,13 +97,6 @@ module.exports = function(grunt) {
     //   }
     // }
   });
-
-  grunt.loadNpmTasks('grunt-eslint');
-  grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-nodeunit');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-  // grunt.loadNpmTasks('grunt-casper');
 
   grunt.registerTask('runtest',function(){
     var done = this.async();
