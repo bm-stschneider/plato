@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = function(grunt) {
+  var libFolder = process.env.DEV === libFolder + '' ? libFolder + '' : 'src';
 
   // Project configuration.
   grunt.initConfig({
@@ -15,13 +16,13 @@ module.exports = function(grunt) {
         src: 'Gruntfile.js'
       },
       lib: {
-        src: ['lib/**/*.js', '!lib/assets/**/*.js']
+        src: [libFolder + '/**/*.js', '!' + libFolder + '/assets/**/*.js']
       },
       test: {
         src: ['test/**/*.js','!test/fixtures/**/*.js']
       },
       assets: {
-        src: ['lib/assets/scripts/*.js']
+        src: [libFolder + '/assets/scripts/*.js']
       }
     },
     eslint: {
@@ -32,31 +33,31 @@ module.exports = function(grunt) {
         src: 'Gruntfile.js'
       },
       lib: {
-        src: ['lib/**/*.js', '!lib/assets/**/*.js']
+        src: [libFolder + '/**/*.js', '!' + libFolder + '/assets/**/*.js']
       },
       test: {
         src: ['test/**/*.js','!test/fixtures/**/*.js']
       },
       assets: {
-        src: ['lib/assets/scripts/*.js']
+        src: [libFolder + '/assets/scripts/*.js']
       }
     },
     uglify: {
       'assets' : {
         files : {
           'lib/assets/scripts/bundles/core-bundle.js' : [
-            'lib/assets/scripts/vendor/jquery-1.8.3.min.js',
-            'lib/assets/scripts/vendor/lodash.min.js',
-            'lib/assets/scripts/vendor/raphael-min.js',
-            'lib/assets/scripts/vendor/morris.min.js',
-            'lib/assets/scripts/vendor/jquery.fittext.js',
-            'lib/assets/scripts/vendor/bootstrap-tooltip.js',
-            'lib/assets/scripts/vendor/bootstrap-popover.js'
+            libFolder + '/assets/scripts/vendor/jquery-1.8.3.min.js',
+            libFolder + '/assets/scripts/vendor/lodash.min.js',
+            libFolder + '/assets/scripts/vendor/raphael-min.js',
+            libFolder + '/assets/scripts/vendor/morris.min.js',
+            libFolder + '/assets/scripts/vendor/jquery.fittext.js',
+            libFolder + '/assets/scripts/vendor/bootstrap-tooltip.js',
+            libFolder + '/assets/scripts/vendor/bootstrap-popover.js'
           ],
           'lib/assets/scripts/bundles/codemirror.js' : [
-            'lib/assets/scripts/vendor/codemirror/codemirror.js',
-            'lib/assets/scripts/vendor/codemirror/javascript.js',
-            'lib/assets/scripts/vendor/codemirror/util/searchcursor.js'
+            libFolder + '/assets/scripts/vendor/codemirror/codemirror.js',
+            libFolder + '/assets/scripts/vendor/codemirror/javascript.js',
+            libFolder + '/assets/scripts/vendor/codemirror/util/searchcursor.js'
           ]
         }
       }
@@ -138,7 +139,7 @@ module.exports = function(grunt) {
           '-xvendor|bundles',
           '-dreports',
           '-tPlato report',
-          'lib/'
+          libFolder + '/'
         ]
       },
       function(err, result, code){
