@@ -2,7 +2,8 @@
 
 module.exports = function(grunt) {
   require('load-grunt-tasks')(grunt);
-  var libFolder = process.env.DEV === libFolder + '' ? libFolder + '' : 'src';
+  var defaultLibFolder = 'lib';
+  var libFolder = process.env.DEV === 'src' ? 'src' : defaultLibFolder;
 
   // Project configuration.
   grunt.initConfig({
@@ -54,11 +55,6 @@ module.exports = function(grunt) {
             libFolder + '/assets/scripts/vendor/jquery.fittext.js',
             libFolder + '/assets/scripts/vendor/bootstrap-tooltip.js',
             libFolder + '/assets/scripts/vendor/bootstrap-popover.js'
-          ],
-          'lib/assets/scripts/bundles/codemirror.js' : [
-            libFolder + '/assets/scripts/vendor/codemirror/codemirror.js',
-            libFolder + '/assets/scripts/vendor/codemirror/javascript.js',
-            libFolder + '/assets/scripts/vendor/codemirror/util/searchcursor.js'
           ]
         }
       }
@@ -154,7 +150,11 @@ module.exports = function(grunt) {
 
   grunt.registerTask('optimize', ['uglify']);
   // Default task.
-  grunt.registerTask('test', ['ts', 'jshint', 'eslint', 'nodeunit', 'runtest', 'runbin']);
+  if (process.env.DEV === 'src'){
+    grunt.registerTask('test', ['ts', 'jshint', 'eslint', 'nodeunit', 'runtest', 'runbin']);
+  } else {
+    grunt.registerTask('test', ['jshint', 'eslint', 'nodeunit', 'runtest', 'runbin']);
+  }
   grunt.registerTask('default', ['test']);
 
 };

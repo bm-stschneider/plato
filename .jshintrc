@@ -13,7 +13,15 @@
   "node": true,
   "globals": {
     "document": false,
-    "casper": false
+    "casper": false,
+    "$": false,
+    "Morris": false,
+    "_": false,
+    "CodeMirror": false,
+    "__report": false,
+    "__history": false,
+    "__options": false
   },
-  "esversion":6
+  "esversion":6,
+  "browser": true
 }
