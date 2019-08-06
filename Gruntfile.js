@@ -77,6 +77,11 @@ module.exports = function(grunt) {
         tasks: ['eslint:test', 'nodeunit']
       }
     },
+    ts: {
+      default : {
+        tsconfig: './tsconfig.json'
+      }
+    },
     // casper : {
     //   test: {
     //     files: {
@@ -149,7 +154,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('optimize', ['uglify']);
   // Default task.
-  grunt.registerTask('test', ['jshint', 'eslint', 'nodeunit', 'runtest', 'runbin']);
+  grunt.registerTask('test', ['ts', 'jshint', 'eslint', 'nodeunit', 'runtest', 'runbin']);
   grunt.registerTask('default', ['test']);
 
 };
